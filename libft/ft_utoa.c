@@ -1,27 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_s.c                                          :+:      :+:    :+:   */
+/*   ft_utoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ualkan <ualkan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/30 00:54:10 by ualkan            #+#    #+#             */
-/*   Updated: 2024/11/30 00:54:10 by ualkan           ###   ########.fr       */
+/*   Created: 2024/11/30 00:53:00 by ualkan            #+#    #+#             */
+/*   Updated: 2024/11/30 00:53:03 by ualkan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	print_s(char *arg)
+static size_t	len_unsigned(unsigned int n)
 {
-	int	len;
+	size_t	len;
 
-	if (!arg)
+	len = 0;
+	if (n == 0)
+		len = 1;
+	while (n > 0)
 	{
-		ft_putstr_fd("(null)", 1);
-		return (6);
+		n = n / 10;
+		len++;
 	}
-	len = ft_strlen(arg);
-	ft_putstr_fd(arg, 1);
 	return (len);
+}
+
+char	*ft_utoa(unsigned int n)
+{
+	size_t	len;
+	char	*space;
+
+	len = len_unsigned(n);
+	space = (char *)malloc((len + 1) * sizeof(char));
+	if (!space)
+		return (0);
+	space[len] = '\0';
+	while (len > 0)
+	{
+		space[--len] = (n % 10) + '0';
+		n = n / 10;
+	}
+	return (space);
 }

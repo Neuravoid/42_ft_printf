@@ -6,7 +6,7 @@
 /*   By: ualkan <ualkan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 13:50:04 by ualkan            #+#    #+#             */
-/*   Updated: 2024/10/30 16:43:29 by ualkan           ###   ########.fr       */
+/*   Updated: 2024/11/30 01:00:12 by ualkan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i])
+	if (!s)
+		return ;
+	else
 	{
-		write(fd, &s[i], 1);
-		i++;
+		write(fd, s, ft_strlen(s));
 	}
 }

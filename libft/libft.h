@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+char	*ft_utoa(unsigned int n);
 typedef struct s_list
 {
 	void			*content;

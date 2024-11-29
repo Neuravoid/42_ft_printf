@@ -1,23 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_p.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ualkan <ualkan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/30 00:54:03 by ualkan            #+#    #+#             */
+/*   Updated: 2024/11/30 00:54:04 by ualkan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
-static int number_len(unsigned long nbr)
+
+int	print_p(void *ptr)
 {
-    int len;
-    
-    len = 0;
-    while(nbr>0)
-    {
-        len++;
-        nbr /= 16;
-    }
-    return len;
-}
+	unsigned long	nbr;
+	char			*hex;
+	int				len;
+	int				printed_len;
 
-void print_p(void *ptr)
-{ 
-    unsigned long nbr;
-    int len;
-
-    nbr = (unsigned long)ptr;
-    len = number_len(nbr);
-    ft_putstr_fd(print_hex(nbr,len,'L'),1);
+	if (!ptr)
+	{
+		ft_putstr_fd("(nil)", 1);
+		return (5);
+	}
+	nbr = (unsigned long)ptr;
+	len = number_len(nbr);
+	hex = print_hex(nbr, len, 'L');
+	if (hex)
+	{
+		ft_putstr_fd(hex, 1);
+		printed_len = ft_strlen(hex);
+		free(hex);
+		return (printed_len);
+	}
+	return (0);
 }
